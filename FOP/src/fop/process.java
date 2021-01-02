@@ -125,16 +125,21 @@ public class process{
     }
     
     public static boolean play(String pathname){
-       String pathdir = path+(os?"\\":"/")+"'"+pathname+"'";
-        File ff = new File(pathdir);
+        String pathdir = path+(os?"\\":"/");
+        
+        File ff = new File(pathdir+pathname);
+        System.err.println(pathdir+"< and >"+pathname);
+        
         try(FileInputStream inputStream = new FileInputStream(ff)){
             System.err.println("found");
             try {
                 if(os){
-                    String[] command = {"cmd.exe","/k",pathdir};
+                    String[] command = {"cmd.exe","/k",pathdir,pathname};
+                    Runtime.getRuntime().exec(command);
+                }else{ 
+                    String[] command = {"/bin/bash", "-c","open "+pathdir+"\""+pathname+"\""};
                     Runtime.getRuntime().exec(command);
                 }
-                else Runtime.getRuntime().exec("open "+pathdir);
             } catch (Exception e) {
                 e.printStackTrace();
             }
