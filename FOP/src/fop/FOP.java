@@ -448,7 +448,9 @@ public class FOP {
     public final static void clearConsole(){  
         try {   
             if (os){  
-                Runtime.getRuntime().exec("cls");  
+                
+                String[] command = {"cmd.exe","/k","cls"};
+                Runtime.getRuntime().exec(command);
             }  
             else{  
                 Runtime.getRuntime().exec("clear");  

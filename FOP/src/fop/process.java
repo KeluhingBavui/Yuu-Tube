@@ -130,7 +130,10 @@ public class process{
         try(FileInputStream inputStream = new FileInputStream(ff)){
             System.err.println("found");
             try {
-                if(os)Runtime.getRuntime().exec("start "+pathdir);
+                if(os){
+                    String[] command = {"cmd.exe","/k","start "+pathdir};
+                    Runtime.getRuntime().exec(command);
+                }
                 else Runtime.getRuntime().exec("open "+pathdir);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -148,8 +151,10 @@ public class process{
     
     public static void make_dir(){
         try {
-           if(os) Runtime.getRuntime().exec("md "+path); 
-           else Runtime.getRuntime().exec("mkdir "+path); 
+            if(os){     
+                String[] command = {"cmd.exe","/k","md "+path};
+                Runtime.getRuntime().exec(command);
+            }else Runtime.getRuntime().exec("mkdir "+path); 
         } catch (Exception e) {
             //means directory is made
             //e.printStackTrace();
