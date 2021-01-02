@@ -131,7 +131,7 @@ public class process{
             System.err.println("found");
             try {
                 if(os){
-                    String[] command = {"cmd.exe","/k","start "+pathdir};
+                    String[] command = {"cmd.exe","/k",pathdir};
                     Runtime.getRuntime().exec(command);
                 }
                 else Runtime.getRuntime().exec("open "+pathdir);
