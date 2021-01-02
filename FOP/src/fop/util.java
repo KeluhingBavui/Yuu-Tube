@@ -19,12 +19,10 @@ public class util {
     }
     
     public static void readuser(){
-        System.err.println("Reading users");
         try{
             ObjectInputStream input = new ObjectInputStream(new FileInputStream("users.data"));
             id_to_users = (HashMap<Integer,User>)input.readObject();
             userptr = (int)input.readInt();
-            System.err.println("read dao");
             input.close();
         }catch(FileNotFoundException e){
             
@@ -32,11 +30,9 @@ public class util {
             e.printStackTrace();
         }
         
-        System.err.println("Reading emails");
         try{
             ObjectInputStream input = new ObjectInputStream(new FileInputStream("emails.data"));
             email_to_id = (HashMap<String,Integer>)input.readObject();
-            System.err.println("read dao");
             input.close();
         }catch(FileNotFoundException e){
             
@@ -44,13 +40,11 @@ public class util {
             e.printStackTrace();
         }
         
-        System.err.println("Reading videos");
         try{
             ObjectInputStream input = new ObjectInputStream(new FileInputStream("videos.data"));
             id_to_videos = (HashMap<Integer,Video>)input.readObject();
             name_to_id = (HashMap<String,Integer>)input.readObject();
             videoptr = (int)input.readInt();
-            System.err.println("read dao");
             input.close();
         }catch(FileNotFoundException e){
             
@@ -58,11 +52,9 @@ public class util {
             e.printStackTrace();
         }
         
-        System.err.println("Reading top");
         try{
             ObjectInputStream input = new ObjectInputStream(new FileInputStream("top.data"));
             top = (ArrayList<Rank>)input.readObject();
-            System.err.println("read dao");
             input.close();
         }catch(FileNotFoundException e){
             
@@ -76,7 +68,6 @@ public class util {
             ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream("users.data"));
             output.writeObject(id_to_users);
             output.writeInt(userptr);
-            System.err.println("overwrite id->users");
             output.close();
         }catch(Exception e){
             e.printStackTrace();
@@ -85,7 +76,6 @@ public class util {
         try{
             ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream("emails.data"));
             output.writeObject(email_to_id);
-            System.err.println("overwrite email->id");
             output.close();
         }catch(Exception e){
             e.printStackTrace();
@@ -96,7 +86,6 @@ public class util {
             output.writeObject(id_to_videos);
             output.writeObject(name_to_id);
             output.writeInt(videoptr);
-            System.err.println("overwrite id->videos");
             output.close();
         }catch(Exception e){
             e.printStackTrace();
@@ -105,7 +94,6 @@ public class util {
         try{
             ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream("top.data"));
             output.writeObject(top);
-            System.err.println("overwrite top");
             output.close();
         }catch(Exception e){
             e.printStackTrace();
