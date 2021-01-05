@@ -268,7 +268,7 @@ public class process{
         for(int i=0; i<Math.min(5,top.size()); i++){
             int videoID = top.get(i).getId();
             Video v = id_to_videos.get(videoID);
-            v.setTrendingNow(false);
+            if(v!=null)v.setTrendingNow(false);
         }
         topp();
         String res = "";
