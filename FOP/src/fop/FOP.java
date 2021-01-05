@@ -19,6 +19,8 @@ public class FOP {
     static Boolean ret_home = false;
     static final Boolean os = System.getProperty("os.name").contains("Windows");
     static String path;
+    static int loginstate=0;
+    static String emailDB,passwordDB,nameDB;
     
     private static String[] start={ 
         "Stop Program",
@@ -54,25 +56,27 @@ public class FOP {
             //c=0,stop program
             if(c==1){
                 //sign in/log in
-                int id = auth.prompt_user();
-                System.err.println("id: "+id);
-                
-                if(id==-2){
-                    System.out.println("Email is not found");
-                    prompt_any();
-                }else if(id==-1){
-                    System.out.println("Password is incorrect.");
-                    prompt_any();
-                }else{
-                    U.welcome(id);
-                    home_page(id);
+                LoginForm lgf = new LoginForm();
+                lgf.setVisible(true);
+                lgf.pack();
+                lgf.setLocationRelativeTo(null);
+                System.out.println("Complete your login process first. Done? Reply \"y\" if done:");
+                String reply = in.next();
+                if (reply.equalsIgnoreCase("y")) {
+                    U.welcome((int) email_to_id.get(emailDB));
+                    home_page((int) email_to_id.get(emailDB));
                 }
             }else if(c==2){
                 //sign up/register
-                int id = reg.create_user();
-                if(id!=-1){
-                    U.hello(id);
-                    home_page(id);
+                RegistrationForm rgf = new RegistrationForm();
+                rgf.setVisible(true);
+                rgf.pack();
+                rgf.setLocationRelativeTo(null);
+                System.out.println("Complete your registration process first. Done? Reply \"y\" if done:");
+                String reply = in.next();
+                if (reply.equalsIgnoreCase("y")) {
+                    U.hello((int) email_to_id.get(emailDB));
+                    home_page((int) email_to_id.get(emailDB));
                 }
             }else if(c == 3){
                 //forgot password
