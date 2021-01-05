@@ -2,7 +2,6 @@ package fop;
 
 import static fop.FOP.*;
 import static fop.process.*;
-import static fop.registration.*;
 import java.io.*;
 import java.util.*;
 

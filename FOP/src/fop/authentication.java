@@ -1,33 +1,14 @@
 package fop;
 
 import static fop.FOP.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class authentication {
-    public static int prompt_user(){
-        System.out.print("Email: ");
-        String email = in.nextLine();
-        
-        System.out.print("Password: ");
-        String password = in.nextLine();
-        
-        if(email_to_id.get(email)==null)return -2;
-        
-        int id = (int)email_to_id.get(email);
-        
-        System.err.println("id found when auth: "+id);
-        return check(id,password);
-    }
-    
-    public static int check(int id, String in_password){
-        //return -2 when account not found
-        //return -1 when password incorrect
-        //return -1 if not found
-        User curr = id_to_users.get(id);
-        if(curr==null)return -2;
-        String password = curr.getPassword();
-        if(password.equals(in_password))return id;
-        return -1;
-    }
     
     public static void chg_password(int id){
         User cur = id_to_users.get(id);
@@ -52,6 +33,7 @@ public class authentication {
                 prompt_any();
                 return; //new not same
             }else if(password_length(new_pass)){
+                UpdatePasswordDB(new_pass);
                 cur.setPassword(new_pass);
                 System.out.println("New password has been set");
                 prompt_any();
@@ -67,4 +49,19 @@ public class authentication {
         return (s.length()>=8);
     }
     
+    public static void UpdatePasswordDB(String new_pass) {
+        PreparedStatement ps;
+        String query = "UPDATE userdata SET password = ? WHERE useremail = ?";
+        int affectedrows = 0;
+        try {
+            ps = ConnectionDB.dbConnection().prepareStatement(query);
+            
+            ps.setString(1, new_pass);
+            ps.setString(2, emailDB);
+            
+            affectedrows = ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

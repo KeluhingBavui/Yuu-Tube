@@ -14,13 +14,13 @@ public class FOP {
     static authentication auth = new authentication();
     static process proc = new process();
     static profile prof = new profile();
-    static registration reg = new registration();
     static util U = new util();
     static Boolean ret_home = false;
     static final Boolean os = System.getProperty("os.name").contains("Windows");
     static String path;
     static int loginstate=0;
     static String emailDB,passwordDB,nameDB;
+    static int userptr = 0;
     
     private static String[] start={ 
         "Stop Program",
