@@ -19,7 +19,7 @@ Steps to get the program running (because cannot connect to database remotely si
 
     then you create table named 'userdata'
     
-    create column named 'useremail', data type is text
+    create column named 'useremail', data type is text         <(https://www.youtube.com/watch?v=KH4OsSCZJUo&t=280s)
     
     a column named 'nameuser', also text
     
