@@ -191,6 +191,7 @@ public class process{
     public static void upload(int authorID){
         make_dir();
         System.out.println("Please ensure you have uploaded your video in this file/directory: "+path);
+        System.out.println("Example: bts.mp4");
         String vidname;
         do{
             System.out.print("Video Name (on Yuu-Tube): ");
