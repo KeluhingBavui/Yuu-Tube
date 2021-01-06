@@ -134,7 +134,7 @@ public class process{
             System.err.println("found");
             try {
                 if(os){
-                    String[] command = {"cmd.exe","/k",pathdir,pathname};
+                    String[] command = {"cmd.exe","/c",pathdir+pathname};
                     Runtime.getRuntime().exec(command);
                 }else{ 
                     String[] command = {"/bin/bash", "-c","open "+pathdir+"\""+pathname+"\""};
