@@ -9,21 +9,21 @@ Haven't done 2FA function
 Login And Registration uses PostgreSQL.
 Problem here is can't connect to database remotely unless in the same local network. (Since we're all all over Malaysia)
 
-Steps to get the program running (because cannot connect to database remotely sia, basically need to install the database in your PC)
+Steps to get the program running (because cannot connect to database remotely sia, basically need to install postgresql in your PC)
 
-1.Download and install postgreSQL(https://www.youtube.com/watch?v=fZQI7nBu32M), pgAdmin4, and postgreSQL JDBC driver(https://www.youtube.com/watch?v=nBZDK8PpR4U&t=226s).
+1.Download and install postgreSQL(https://www.youtube.com/watch?v=fZQI7nBu32M), pgAdmin4, and postgreSQL JDBC driver(https://jdbc.postgresql.org/download.html).
 
-2.Add the postgresql JDBC driver to project library in your IDE
+2.Add the postgresql JDBC driver to project library in your IDE. (https://www.youtube.com/watch?v=nBZDK8PpR4U&t=241s) < watch until add library part only enough. The connectionDB class I already do
 
-3.Create database name 'yuutubedb', in that database
+3.Create database name 'yuutubedb', in that database,         (All this can be done in pgAdmin4)
 
-    create table named 'userdata'
+    then you create table named 'userdata'
     
     create column named 'useremail', data type is text
     
-    create column named 'nameuser', also text
+    a column named 'nameuser', also text
     
-    create column named 'password', also text
+    a column named 'password', also text
     
     (https://www.youtube.com/watch?v=fZQI7nBu32M) < to see how to create all above using pgAdmin. It's fairly simple.
 
