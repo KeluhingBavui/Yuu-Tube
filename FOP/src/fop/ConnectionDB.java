@@ -13,6 +13,7 @@ public class ConnectionDB {
         Connection connection = null;
         String url = "jdbc:postgresql://localhost:5432/yuutubedb";
         String user = "postgres";
+        //your password
         String password = "danielwan";
         
         try {
