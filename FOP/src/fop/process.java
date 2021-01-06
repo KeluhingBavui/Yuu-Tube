@@ -241,6 +241,7 @@ public class process{
             author.setTotalViews(totalviews-views);
             author.del_videos(c);
             id_to_videos.remove(videoID);
+            name_to_id.remove(v.getTitle());
             System.out.println(v.getTitle()+" has been deleted.");
         }
         return;
