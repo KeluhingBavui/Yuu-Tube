@@ -192,23 +192,33 @@ public class LoginForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jLabelCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCloseMouseClicked
+        //Obviously this is to close this login form window by clicking X
         this.dispose();
     }//GEN-LAST:event_jLabelCloseMouseClicked
 
     private void jLabelMinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelMinMouseClicked
+        //Minimize the this form window
         this.setState(LoginForm.ICONIFIED);
     }//GEN-LAST:event_jLabelMinMouseClicked
 
     private void jLabelRegisterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelRegisterMouseClicked
+        //Code for when "Click to register" button is clicked
+        
+        //Call for registration form to appear
         RegistrationForm rgf = new RegistrationForm();
         rgf.setVisible(true);
         rgf.pack();
         rgf.setLocationRelativeTo(null);
         rgf.setDefaultCloseOperation(LoginForm.EXIT_ON_CLOSE);
+        
+        //Closes this login form window
         this.dispose();
     }//GEN-LAST:event_jLabelRegisterMouseClicked
 
     private void jButton_LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_LoginActionPerformed
+        //This is the code when someone clicked the Login button
+        
+        //Check whether details input from user is same with database
         PreparedStatement ps;
         ResultSet rs;
         String email = jTextField1.getText();
@@ -224,12 +234,14 @@ public class LoginForm extends javax.swing.JFrame {
             rs = ps.executeQuery();
             
             if(rs.next()) {
+                //Details are the same!
                 loginstate = true;
                 emailDB = email;
                 //System.err.println("id found when auth: "+ (int)email_to_id.get(emailDB));
                 this.dispose();
             }
             else {
+                //Wrong details
                 JOptionPane.showMessageDialog(null, "The email or password is wrong. Please try again.");
             }
         } catch (SQLException ex) {

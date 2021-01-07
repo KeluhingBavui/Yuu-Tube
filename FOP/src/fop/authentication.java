@@ -50,6 +50,10 @@ public class authentication {
     }
     
     public static void UpdatePasswordDB(String new_pass) {
+        /*Since we're using both database and fileio at the same time, whenever a
+        user changes the password, this method will update the new password in the
+        database too instead of just updating the details in the binary file
+        */
         PreparedStatement ps;
         String query = "UPDATE userdata SET password = ? WHERE useremail = ?";
         int affectedrows = 0;

@@ -268,6 +268,7 @@ public class RegistrationForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabelCloseMouseClicked
 
     private void jLabelMinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelMinMouseClicked
+        //Minimize window
         this.setState(RegistrationForm.ICONIFIED);
     }//GEN-LAST:event_jLabelMinMouseClicked
 
@@ -276,11 +277,13 @@ public class RegistrationForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField_EmailActionPerformed
 
     private void jLabelLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelLoginMouseClicked
+        //Call for login form to appear
         LoginForm lgf = new LoginForm();
         lgf.setVisible(true);
         lgf.pack();
         lgf.setLocationRelativeTo(null);
         lgf.setDefaultCloseOperation(RegistrationForm.EXIT_ON_CLOSE);
+        //Close this form window
         this.dispose();
     }//GEN-LAST:event_jLabelLoginMouseClicked
 
@@ -289,11 +292,13 @@ public class RegistrationForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField_NameActionPerformed
 
     private void jButton_Register_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Register_ActionPerformed
+        //Register button clicked!
+        //Receive input from user from the text boxes
         String name = jTextField_Name.getText();
         String email = jTextField_Email.getText();
         String pass = String.valueOf(jPasswordField_PASSWORD.getPassword());
         String repass = String.valueOf(jPasswordField_PasswordRetype.getPassword());
-
+        //Making sure the users follow the rules when filling up details
         if (name.equals("")) {
             JOptionPane.showMessageDialog(null, "Name field is empty, please fill in your name");
         } else if (email.equals("")) {
@@ -305,6 +310,8 @@ public class RegistrationForm extends javax.swing.JFrame {
         } else if (checkUsername(email)) {
             JOptionPane.showMessageDialog(null, "The email or account entered already exist. Please try again with a different email");
         } else {
+            //All rules cleared
+            //Insert data received into database
             PreparedStatement ps;
             String query = "INSERT INTO userdata (useremail,  nameuser, password) VALUES (?,?,?)";
 
@@ -317,13 +324,17 @@ public class RegistrationForm extends javax.swing.JFrame {
 
                 if (ps.executeUpdate() > 0) {
                     JOptionPane.showMessageDialog(null, "You have successfully registered");
+                    //Put the details and info received from user into static
                     emailDB = email;
                     passwordDB = pass;
                     nameDB = name;
+                    //Set unique id for user(For the program to identify the different users)
                     int id = userptr;
                     User new_user = new User(name, email, pass, id);
+                    //Store the details in arraylist
                     id_to_users.put(id, new_user);
                     email_to_id.put(email, id);
+                    //Iterate the userptr(basically user id) so that no replication of id
                     userptr++;
                     loginstate = true;
                 }
@@ -335,6 +346,7 @@ public class RegistrationForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_Register_ActionPerformed
 
     public boolean checkUsername(String email) {
+        //This method checks whether the given email from user already exist in database or not
         PreparedStatement ps;
         ResultSet rs;
         boolean checkemail = false;

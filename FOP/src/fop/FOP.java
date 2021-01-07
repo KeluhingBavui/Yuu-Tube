@@ -57,11 +57,25 @@ public class FOP {
             if(c==1){
                 //sign in/log in
                 loginstate = false;
+                
+                //Call for login form to be visible
                 LoginForm lgf = new LoginForm();
                 lgf.setVisible(true);
                 lgf.pack();
                 lgf.setLocationRelativeTo(null);
+                
+                /*Prompt the user for any input because want to pause the program from
+                directly running towards the end of this method instantly without
+                waiting for the user to finish the login process. 
+                
+                If not, the program will run to an error since no data is input 
+                yet for emails, id etc for the program to recognize.
+                */
                 prompt_any();
+                
+                /*Loginstate is used to check whether the user actually finished
+                login or not. Basically a lie detector.
+                */
                 if(loginstate==true) {
                     int userID = (int) email_to_id.get(emailDB);
                     U.welcome(userID);
@@ -72,21 +86,25 @@ public class FOP {
                 }
             }else if(c==2){
                 //sign up/register
+                
+                //Call for registration form to be visible
                 RegistrationForm rgf = new RegistrationForm();
                 rgf.setVisible(true);
                 rgf.pack();
                 rgf.setLocationRelativeTo(null);
                 prompt_any();
+                
+                //Lie detector again
                 if(loginstate==true) {
                     int userID = (int) email_to_id.get(emailDB);
                     U.hello(userID);
                     home_page(userID);
                 } else {
-                    rgf.dispose();
+                    rgf.dispose();                            
                     System.out.println("You haven't registered to the system");
                 }
             }else if(c == 3){
-                //forgot password
+                //forgot password(This feature is not done yet. This is for 2FA)
             }else if(c == 4){
                 //list all 
                 U.list();
