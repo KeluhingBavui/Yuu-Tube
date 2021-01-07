@@ -63,11 +63,22 @@ public class FOP {
                 lgf.setLocationRelativeTo(null);
                 System.out.print("Complete your login process first. Done? (y/n): ");
                 if(prompt_yn()==true){
+                    if(loginstate==1) {
                     U.welcome((int) email_to_id.get(emailDB));
                     home_page((int) email_to_id.get(emailDB));
                     } else {
-                        System.out.println("You haven't logged in to the system yet!");
+                        lgf.dispose();
+                        System.out.println("You have not logged in yet to the system!");
                         start_page();
+                    }
+                    } else {
+                        if(loginstate==1) {
+                        System.out.println("You have already logged in to the system!");
+                        U.welcome((int) email_to_id.get(emailDB));
+                        home_page((int) email_to_id.get(emailDB));
+                        } else {
+                            start_page();
+                        }
                     }
                 }
             else if(c==2){
@@ -79,11 +90,23 @@ public class FOP {
                 System.out.print("Complete your registration process first. Done? (y/n): ");
                 String reply = in.next();
                 if (prompt_yn()==true) {
+                    if(loginstate==1) {
                     U.hello((int) email_to_id.get(emailDB));
                     home_page((int) email_to_id.get(emailDB));
                     } else {
-                        System.out.println("You haven't registered to the system yet!");
+                        rgf.dispose();
+                        System.out.println("You haven't registered to the system");
                         start_page();
+                    }
+                    } else {
+                        if(loginstate==1) {
+                        System.out.println("You have already registered to the system!");
+                        U.welcome((int) email_to_id.get(emailDB));
+                        home_page((int) email_to_id.get(emailDB));
+                        } else {
+                            U.hello((int) email_to_id.get(emailDB));
+                            home_page((int) email_to_id.get(emailDB));
+                        }
                     }
                 
             }else if(c == 3){
