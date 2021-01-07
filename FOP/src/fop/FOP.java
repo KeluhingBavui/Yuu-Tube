@@ -61,56 +61,31 @@ public class FOP {
                 lgf.setVisible(true);
                 lgf.pack();
                 lgf.setLocationRelativeTo(null);
-                System.out.println("Complete the login process first. Done? Reply(y/n):");
-                String confirm = in.next();
-                if (confirm.equalsIgnoreCase("y")) {
-                    lgf.dispose();
-                    if(loginstate==1) {
+                System.out.print("Complete your login process first. Done? (y/n): ");
+                if(prompt_yn()==true){
                     U.welcome((int) email_to_id.get(emailDB));
                     home_page((int) email_to_id.get(emailDB));
                     } else {
                         System.out.println("You haven't logged in to the system yet!");
                         start_page();
                     }
-                } else if(confirm.equalsIgnoreCase("n")) {
-                    lgf.dispose();
-                    if(loginstate==1) {
-                        System.out.println("You've already logged in to the system!");
-                        U.welcome((int) email_to_id.get(emailDB));
-                        home_page((int) email_to_id.get(emailDB));
-                    } else {
-                        start_page();
-                    }
-                } else {
-                    lgf.dispose();
                 }
-            }else if(c==2){
+            else if(c==2){
                 //sign up/register
                 RegistrationForm rgf = new RegistrationForm();
                 rgf.setVisible(true);
                 rgf.pack();
                 rgf.setLocationRelativeTo(null);
-                System.out.println("Complete your registration process first. Done? Reply(y/n):");
-                String confirm = in.next();
-                if (confirm.equalsIgnoreCase("y")) {
-                    if(loginstate==1) {
+                System.out.print("Complete your registration process first. Done? (y/n): ");
+                String reply = in.next();
+                if (prompt_yn()==true) {
                     U.hello((int) email_to_id.get(emailDB));
                     home_page((int) email_to_id.get(emailDB));
                     } else {
                         System.out.println("You haven't registered to the system yet!");
                         start_page();
                     }
-                } else if(confirm.equalsIgnoreCase("n")) {
-                    if(loginstate==1) {
-                        System.out.println("You have already been registered to the system!");
-                        U.welcome((int) email_to_id.get(emailDB));
-                        home_page((int) email_to_id.get(emailDB));
-                    } else {
-                        start_page();
-                    }
-                } else {
-                    rgf.dispose();
-                }
+                
             }else if(c == 3){
                 //forgot password
             }else if(c == 4){
@@ -478,6 +453,18 @@ public class FOP {
         clearConsole();
         return c;
     }
+    
+    public static boolean prompt_yn(){
+        do{
+            String res = in.nextLine();
+            if(res.equals("y"))return true;
+            else if(res.equals("n"))return false;
+            else{
+                System.out.print("Invalid input. Please enter 'y' or 'n': ");
+            }
+        }while(true);
+    }
+    
     public static void prompt_any(){
         System.out.println("Press any key to continue.");
         in.nextLine();
