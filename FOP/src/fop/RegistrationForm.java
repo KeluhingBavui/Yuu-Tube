@@ -369,7 +369,7 @@ public class RegistrationForm extends javax.swing.JFrame {
     }
     
     private void jButton_CancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_CancelActionPerformed
-        System.exit(0);
+        this.dispose();
     }//GEN-LAST:event_jButton_CancelActionPerformed
 
     /**
