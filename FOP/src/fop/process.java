@@ -234,7 +234,6 @@ public class process{
         
         //last permission
         System.out.print("Are you sure you want to delete this video? (y/n): ");
-        String confirm = in.nextLine();
         if(prompt_yn()==true){
             int views = v.getViewsCount();
             int totalviews = author.getTotalViews();

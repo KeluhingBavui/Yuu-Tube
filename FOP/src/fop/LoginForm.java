@@ -225,7 +225,7 @@ public class LoginForm extends javax.swing.JFrame {
             
             if(rs.next()) {
                 emailDB = email;
-                System.err.println("id found when auth: "+ (int)email_to_id.get(emailDB));
+                //System.err.println("id found when auth: "+ (int)email_to_id.get(emailDB));
                 this.dispose();
             }
             else {
