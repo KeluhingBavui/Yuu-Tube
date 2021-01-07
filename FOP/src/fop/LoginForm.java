@@ -192,7 +192,7 @@ public class LoginForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jLabelCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCloseMouseClicked
-        System.exit(0);
+        this.dispose();
     }//GEN-LAST:event_jLabelCloseMouseClicked
 
     private void jLabelMinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelMinMouseClicked
@@ -224,8 +224,10 @@ public class LoginForm extends javax.swing.JFrame {
             rs = ps.executeQuery();
             
             if(rs.next()) {
+                loginstate = 1;
                 emailDB = email;
                 System.err.println("id found when auth: "+ (int)email_to_id.get(emailDB));
+                System.out.println("You've successfully logged in! Press y to continue...");
                 this.dispose();
             }
             else {

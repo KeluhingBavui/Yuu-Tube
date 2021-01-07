@@ -264,7 +264,7 @@ public class RegistrationForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabelCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCloseMouseClicked
-        System.exit(0);
+        this.dispose();
     }//GEN-LAST:event_jLabelCloseMouseClicked
 
     private void jLabelMinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelMinMouseClicked
@@ -325,6 +325,7 @@ public class RegistrationForm extends javax.swing.JFrame {
                     id_to_users.put(id, new_user);
                     email_to_id.put(email, id);
                     userptr++;
+                    loginstate = 1;
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(RegistrationForm.class.getName()).log(Level.SEVERE, null, ex);
