@@ -325,7 +325,7 @@ public class RegistrationForm extends javax.swing.JFrame {
                     id_to_users.put(id, new_user);
                     email_to_id.put(email, id);
                     userptr++;
-                    loginstate = 1;
+                    loginstate = true;
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(RegistrationForm.class.getName()).log(Level.SEVERE, null, ex);

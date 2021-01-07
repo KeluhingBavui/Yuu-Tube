@@ -18,7 +18,7 @@ public class FOP {
     static Boolean ret_home = false;
     static final Boolean os = System.getProperty("os.name").contains("Windows");
     static String path;
-    static int loginstate;
+    static boolean loginstate;
     static String emailDB,passwordDB,nameDB;
     static int userptr = 0;
     
@@ -56,59 +56,35 @@ public class FOP {
             //c=0,stop program
             if(c==1){
                 //sign in/log in
-                loginstate = 0;
+                loginstate = false;
                 LoginForm lgf = new LoginForm();
                 lgf.setVisible(true);
                 lgf.pack();
                 lgf.setLocationRelativeTo(null);
-                System.out.print("Complete your login process first. Done? (y/n): ");
-                if(prompt_yn()==true){
-                    if(loginstate==1) {
-                    U.welcome((int) email_to_id.get(emailDB));
-                    home_page((int) email_to_id.get(emailDB));
-                    } else {
-                        lgf.dispose();
-                        System.out.println("You have not logged in yet to the system!");
-                        start_page();
-                    }
-                    } else {
-                        if(loginstate==1) {
-                        System.out.println("You have already logged in to the system!");
-                        U.welcome((int) email_to_id.get(emailDB));
-                        home_page((int) email_to_id.get(emailDB));
-                        } else {
-                            start_page();
-                        }
-                    }
+                prompt_any();
+                if(loginstate==true) {
+                    int userID = (int) email_to_id.get(emailDB);
+                    U.welcome(userID);
+                    home_page(userID);
+                } else {
+                    lgf.dispose();
+                    System.out.println("You have not logged in yet to the system!");
                 }
-            else if(c==2){
+            }else if(c==2){
                 //sign up/register
                 RegistrationForm rgf = new RegistrationForm();
                 rgf.setVisible(true);
                 rgf.pack();
                 rgf.setLocationRelativeTo(null);
-                System.out.print("Complete your registration process first. Done? (y/n): ");
-                String reply = in.next();
-                if (prompt_yn()==true) {
-                    if(loginstate==1) {
-                    U.hello((int) email_to_id.get(emailDB));
-                    home_page((int) email_to_id.get(emailDB));
-                    } else {
-                        rgf.dispose();
-                        System.out.println("You haven't registered to the system");
-                        start_page();
-                    }
-                    } else {
-                        if(loginstate==1) {
-                        System.out.println("You have already registered to the system!");
-                        U.welcome((int) email_to_id.get(emailDB));
-                        home_page((int) email_to_id.get(emailDB));
-                        } else {
-                            U.hello((int) email_to_id.get(emailDB));
-                            home_page((int) email_to_id.get(emailDB));
-                        }
-                    }
-                
+                prompt_any();
+                if(loginstate==true) {
+                    int userID = (int) email_to_id.get(emailDB);
+                    U.hello(userID);
+                    home_page(userID);
+                } else {
+                    rgf.dispose();
+                    System.out.println("You haven't registered to the system");
+                }
             }else if(c == 3){
                 //forgot password
             }else if(c == 4){
@@ -164,7 +140,7 @@ public class FOP {
             
             if(c==0){
                 //sign out
-                loginstate = 0;
+                loginstate = false;
                 System.out.printf("%s %s %s\n","--- ",home_actions[c]," ---");
             }else if(c==1){
                 //play videos
