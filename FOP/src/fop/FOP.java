@@ -60,9 +60,8 @@ public class FOP {
                 lgf.setVisible(true);
                 lgf.pack();
                 lgf.setLocationRelativeTo(null);
-                System.out.println("Complete your login process first. Done? Reply \"y\" if done:");
-                String reply = in.next();
-                if (reply.equalsIgnoreCase("y")) {
+                System.out.print("Complete your login process first. Done? (y/n): ");
+                if(prompt_yn()==true){
                     U.welcome((int) email_to_id.get(emailDB));
                     home_page((int) email_to_id.get(emailDB));
                 }
@@ -72,9 +71,9 @@ public class FOP {
                 rgf.setVisible(true);
                 rgf.pack();
                 rgf.setLocationRelativeTo(null);
-                System.out.println("Complete your registration process first. Done? Reply \"y\" if done:");
+                System.out.print("Complete your registration process first. Done? (y/n): ");
                 String reply = in.next();
-                if (reply.equalsIgnoreCase("y")) {
+                if (prompt_yn()==true) {
                     U.hello((int) email_to_id.get(emailDB));
                     home_page((int) email_to_id.get(emailDB));
                 }
@@ -444,6 +443,18 @@ public class FOP {
         clearConsole();
         return c;
     }
+    
+    public static boolean prompt_yn(){
+        do{
+            String res = in.nextLine();
+            if(res.equals("y"))return true;
+            else if(res.equals("n"))return false;
+            else{
+                System.out.print("Invalid input. Please enter 'y' or 'n': ");
+            }
+        }while(true);
+    }
+    
     public static void prompt_any(){
         System.out.println("Press any key to continue.");
         in.nextLine();

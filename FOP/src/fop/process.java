@@ -207,8 +207,7 @@ public class process{
         }
         
         System.out.print("Your video is supposed to pop out now. \nConfirm to upload this video? (y/n): ");
-        String confirm = in.nextLine();
-        if(confirm.equals("y")){
+        if(prompt_yn()==true){
             User author = id_to_users.get(authorID);
             author.add_videos(videoptr);
             Video new_vid = new Video(videoptr,vidpath,vidname,authorID);
@@ -236,7 +235,7 @@ public class process{
         //last permission
         System.out.print("Are you sure you want to delete this video? (y/n): ");
         String confirm = in.nextLine();
-        if(confirm.equals("y")){
+        if(prompt_yn()==true){
             int views = v.getViewsCount();
             int totalviews = author.getTotalViews();
             author.setTotalViews(totalviews-views);
