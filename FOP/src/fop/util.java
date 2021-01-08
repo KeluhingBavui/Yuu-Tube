@@ -1,6 +1,6 @@
 package fop;
 
-import static fop.FOP.*;
+import static fop.YuuTube.*;
 import static fop.process.*;
 import java.io.*;
 import java.util.*;

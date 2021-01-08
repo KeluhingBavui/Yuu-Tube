@@ -9,7 +9,7 @@ package fop;
  *
  * @author Daniel
  */
-import static fop.FOP.*;
+import static fop.YuuTube.*;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
@@ -336,7 +336,7 @@ public class RegistrationForm extends javax.swing.JFrame {
                     email_to_id.put(email, id);
                     //Iterate the userptr(basically user id) so that no replication of id
                     userptr++;
-                    loginstate = true;
+                    loginstate = -1;
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(RegistrationForm.class.getName()).log(Level.SEVERE, null, ex);

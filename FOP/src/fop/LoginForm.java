@@ -1,6 +1,6 @@
 package fop;
 
-import static fop.FOP.*;
+import static fop.YuuTube.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -235,7 +235,7 @@ public class LoginForm extends javax.swing.JFrame {
             
             if(rs.next()) {
                 //Details are the same!
-                loginstate = true;
+                loginstate = 1;
                 emailDB = email;
                 //System.err.println("id found when auth: "+ (int)email_to_id.get(emailDB));
                 this.dispose();

@@ -1,6 +1,6 @@
 package fop;
 
-import static fop.FOP.*;
+import static fop.YuuTube.*;
 import java.io.*;
 import java.util.*;
 
@@ -191,7 +191,9 @@ public class process{
     public static void upload(int authorID){
         make_dir();
         System.out.println("Please ensure you have uploaded your video in this file/directory: "+path);
-        System.out.println("Example: bts.mp4");
+        System.out.println("Example: ");
+        System.out.println("Video Name (on Yuu-Tube): BTS");
+        System.out.println("Video name in the file/directory: bts.mp4");
         String vidname;
         do{
             System.out.print("Video Name (on Yuu-Tube): ");

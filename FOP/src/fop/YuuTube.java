@@ -3,7 +3,7 @@ package fop;
 import java.util.*;
 import java.io.*;
 
-public class FOP {
+public class YuuTube {
     static Scanner in = new Scanner(System.in);
     static HashMap<Integer,User>id_to_users = new HashMap<Integer,User>(); 
     static HashMap<String,Integer>email_to_id = new HashMap<String,Integer>();
@@ -18,7 +18,7 @@ public class FOP {
     static Boolean ret_home = false;
     static final Boolean os = System.getProperty("os.name").contains("Windows");
     static String path;
-    static boolean loginstate;
+    static int loginstate; //-1: sign up, 0: fail, 1:sign in
     static String emailDB,passwordDB,nameDB;
     static int userptr = 0;
     
@@ -34,9 +34,9 @@ public class FOP {
         //determine OS to run terminal/command prompt
         File f = new File(System.getProperty("user.dir"));
         if(os){
-            path = f.toString()+"\\FOPvideos";
+            path = f.toString()+"\\YuuTubevideos";
         }else{
-            path = f.toString()+"/FOPvideos";
+            path = f.toString()+"/YuuTubevideos";
         }
         start_page();
     }
@@ -46,6 +46,8 @@ public class FOP {
         //read file
         U.readuser();
         do{
+            //sign in/log in
+            loginstate = 0;
             System.out.println("--- Welcome to Yuu-Tube ---");
             for(int i=0; i<start.length; i++){
                 System.out.printf("%d. %s\n",i,start[i]);
@@ -55,9 +57,6 @@ public class FOP {
             System.out.printf("%s %s %s\n","--- ",start[c]," ---");
             //c=0,stop program
             if(c==1){
-                //sign in/log in
-                loginstate = false;
-                
                 //Call for login form to be visible
                 LoginForm lgf = new LoginForm();
                 lgf.setVisible(true);
@@ -76,9 +75,10 @@ public class FOP {
                 /*Loginstate is used to check whether the user actually finished
                 login or not. Basically a lie detector.
                 */
-                if(loginstate==true) {
+                if(loginstate==-1||loginstate==1) {
                     int userID = (int) email_to_id.get(emailDB);
-                    U.welcome(userID);
+                    if(loginstate==1)U.welcome(userID);
+                    else U.hello(userID);
                     home_page(userID);
                 } else {
                     lgf.dispose();
@@ -95,9 +95,10 @@ public class FOP {
                 prompt_any();
                 
                 //Lie detector again
-                if(loginstate==true) {
+                if(loginstate==-1||loginstate==1) {
                     int userID = (int) email_to_id.get(emailDB);
-                    U.hello(userID);
+                    if(loginstate==1)U.welcome(userID);
+                    else U.hello(userID);
                     home_page(userID);
                 } else {
                     rgf.dispose();                            
@@ -158,7 +159,7 @@ public class FOP {
             
             if(c==0){
                 //sign out
-                loginstate = false;
+                loginstate = 0;
                 System.out.printf("%s %s %s\n","--- ",home_actions[c]," ---");
             }else if(c==1){
                 //play videos

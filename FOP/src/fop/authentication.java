@@ -1,6 +1,6 @@
 package fop;
 
-import static fop.FOP.*;
+import static fop.YuuTube.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

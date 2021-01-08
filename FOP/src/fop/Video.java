@@ -1,6 +1,6 @@
 package fop;
 
-import static fop.FOP.*;
+import static fop.YuuTube.*;
 import java.util.*;
 
 public class Video implements java.io.Serializable{
