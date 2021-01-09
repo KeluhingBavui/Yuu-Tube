@@ -298,6 +298,8 @@ public class RegistrationForm extends javax.swing.JFrame {
         String email = jTextField_Email.getText();
         String pass = String.valueOf(jPasswordField_PASSWORD.getPassword());
         String repass = String.valueOf(jPasswordField_PasswordRetype.getPassword());
+        //Set unique id for user(For the program to identify the different users)
+        int id = userptr;
         //Making sure the users follow the rules when filling up details
         if (name.equals("")) {
             JOptionPane.showMessageDialog(null, "Name field is empty, please fill in your name");
@@ -313,14 +315,15 @@ public class RegistrationForm extends javax.swing.JFrame {
             //All rules cleared
             //Insert data received into database
             PreparedStatement ps;
-            String query = "INSERT INTO userdata (useremail,  nameuser, password) VALUES (?,?,?)";
+            String query = "INSERT INTO userdata (userid, useremail,  nameuser, password) VALUES (?,?,?,?)";
 
             try {
                 ps = ConnectionDB.dbConnection().prepareStatement(query);
-
-                ps.setString(1, email);
-                ps.setString(2, name);
-                ps.setString(3, pass);
+                
+                ps.setInt(1, id);
+                ps.setString(2, email);
+                ps.setString(3, name);
+                ps.setString(4, pass);
 
                 if (ps.executeUpdate() > 0) {
                     JOptionPane.showMessageDialog(null, "You have successfully registered");
@@ -328,8 +331,6 @@ public class RegistrationForm extends javax.swing.JFrame {
                     emailDB = email;
                     passwordDB = pass;
                     nameDB = name;
-                    //Set unique id for user(For the program to identify the different users)
-                    int id = userptr;
                     User new_user = new User(name, email, pass, id);
                     //Store the details in arraylist
                     id_to_users.put(id, new_user);

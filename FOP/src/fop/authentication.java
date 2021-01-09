@@ -23,6 +23,23 @@ public class authentication {
             cur.setEmail(emailDB);
             email_to_id.remove(oldemail);
             email_to_id.put(newemail, userID);
+            UpdateEmailDB(emailDB);
+        }
+    }
+    
+    public static void UpdateEmailDB(String newemail) {
+        PreparedStatement ps;
+        String query = "UPDATE userdata SET useremail = ? WHERE userid = ?";
+        int affectedrows = 0;
+        try {
+            ps = ConnectionDB.dbConnection().prepareStatement(query);
+            
+            ps.setString(1, newemail);
+            ps.setInt(2, email_to_id.get(newemail));
+            
+            affectedrows = ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
