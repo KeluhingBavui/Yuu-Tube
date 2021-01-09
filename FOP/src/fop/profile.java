@@ -8,6 +8,7 @@ public class profile {
     static String[] profile_actions = {
         "Go back", 
         "Home Page",
+        "Change Email",
         "Change Password",                               
         "History",
         "Liked Videos"
@@ -30,12 +31,15 @@ public class profile {
                 //home page
                 ret_home=true;
             }else if(c==2){
+                //change email
+                auth.chg_email(userID);
+            }else if(c==3){
                 //change password
                 auth.chg_password(userID);
-            }else if(c==3){
+            }else if(c==4){
                 //history
                 history_page(userID);
-            }else if(c==4){
+            }else if(c==5){
                 liked_page(userID);
             }
             if(ret_home)break;

@@ -10,8 +10,24 @@ import javax.swing.JOptionPane;
 
 public class authentication {
     
-    public static void chg_password(int id){
-        User cur = id_to_users.get(id);
+    public static void chg_email(int userID){
+        User cur = id_to_users.get(userID);
+        System.out.println("--- Change Email ---");
+        String oldemail = cur.getEmail();
+        System.out.println("Old Email: "+oldemail);
+        System.out.print("New Email: ");
+        String newemail = in.nextLine();
+        System.out.print("Confirm changing email from "+oldemail+" to "+newemail+"(y/n): ");
+        if(prompt_yn()==true){
+            emailDB = newemail;
+            cur.setEmail(emailDB);
+            email_to_id.remove(oldemail);
+            email_to_id.put(newemail, userID);
+        }
+    }
+    
+    public static void chg_password(int userID){
+        User cur = id_to_users.get(userID);
         String old_pass = cur.getPassword();
         System.out.println("--- Change Password ---");
         System.out.print("Old Password: ");
