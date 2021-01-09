@@ -99,6 +99,17 @@ public class util {
         }
     }
     
+    public static void hello(int id){
+        User now = id_to_users.get(id);
+        System.out.printf("%s %s %s \n","--- Hello",now.getName(),"! ---");
+    }
+    
+    public static void welcome(int id){
+        User now = id_to_users.get(id);
+        System.out.printf("%s %s %s \n","--- Welcome back",now.getName(),"! ---");
+    } 
+    
+    /*
     public static void list(){
         System.err.println("listing --- users size: "+id_to_users.size()+" "+email_to_id.size()+" "+id_to_videos.size()+" "+name_to_id.size()+"\n");
         for(Map.Entry iter:id_to_users.entrySet()){
@@ -125,15 +136,6 @@ public class util {
         
         return;
     }
-    
-    public static void hello(int id){
-        User now = id_to_users.get(id);
-        System.out.printf("%s %s %s \n","--- Hello",now.getName(),"! ---");
-    }
-    
-    public static void welcome(int id){
-        User now = id_to_users.get(id);
-        System.out.printf("%s %s %s \n","--- Welcome back",now.getName(),"! ---");
-    } 
+    */
 }
 

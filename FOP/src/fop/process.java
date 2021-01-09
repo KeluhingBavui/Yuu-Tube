@@ -128,10 +128,10 @@ public class process{
         String pathdir = path+(os?"\\":"/");
         
         File ff = new File(pathdir+pathname);
-        System.err.println(pathdir+"< and >"+pathname);
+        //System.err.println(pathdir+"< and >"+pathname);
         
         try(FileInputStream inputStream = new FileInputStream(ff)){
-            System.err.println("found");
+            //System.err.println("found");
             try {
                 if(os){
                     String[] command = {"cmd.exe","/c",pathdir+pathname};
@@ -226,7 +226,7 @@ public class process{
         System.out.println(show_videos(authorID));
         User author = id_to_users.get(authorID);
         ArrayList<Integer>videos = author.getVideos();
-        for(int i:videos)System.err.print(i+" "); System.err.println("");
+        //for(int i:videos)System.err.print(i+" "); System.err.println("");
         int c = prompt_input1(videos.size());
         int videoID=videos.get(c);
         Video v = id_to_videos.get(videoID);

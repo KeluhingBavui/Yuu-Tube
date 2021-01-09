@@ -26,8 +26,6 @@ public class YuuTube {
         "Stop Program",
         "Sign In",
         "Sign Up",
-        "Forgot Password",
-        "List all"
     };
     
     public static void main(String[] args){ //main
@@ -104,11 +102,6 @@ public class YuuTube {
                     rgf.dispose();                            
                     System.out.println("You haven't registered to the system");
                 }
-            }else if(c == 3){
-                //forgot password(This feature is not done yet. This is for 2FA)
-            }else if(c == 4){
-                //list all 
-                U.list();
             }
             //keep save 
             U.save();
@@ -448,9 +441,8 @@ public class YuuTube {
             choice = in.nextLine(); 
             invalid = !U.isInteger(choice);
             if(!invalid)c = Integer.parseInt(choice);
-            System.err.println("choice: "+choice);
+            //System.err.println("choice: "+choice);
         }
-        clearConsole();
         return c;
     }
     public static int prompt_input1(int mx){
@@ -466,9 +458,8 @@ public class YuuTube {
             choice = in.nextLine(); 
             invalid = !U.isInteger(choice);
             if(!invalid)c = Integer.parseInt(choice)-1;
-            System.err.println("choice: "+choice);
+            //System.err.println("choice: "+choice);
         }
-        clearConsole();
         return c;
     }
     
@@ -486,8 +477,8 @@ public class YuuTube {
     public static void prompt_any(){
         System.out.println("Press any key to continue.");
         in.nextLine();
-        clearConsole();
     }
+    /*
     public final static void clearConsole(){  
         try {   
             if (os){  
@@ -502,5 +493,6 @@ public class YuuTube {
         catch (final Exception e){  
             e.printStackTrace();  
         }  
-    }  
+    } 
+    */
 }
