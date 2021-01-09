@@ -122,8 +122,8 @@ public class Video implements java.io.Serializable{
         author.incViews();
     }
     
-    public void comment(){
-        
+    public void delcomment(int pos){
+        comments.remove(pos);
     }
     
     public void setPath(String path) {

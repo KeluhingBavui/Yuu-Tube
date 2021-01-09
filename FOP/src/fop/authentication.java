@@ -4,6 +4,8 @@ import static fop.YuuTube.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -97,6 +99,70 @@ public class authentication {
             ps.setString(2, emailDB);
             
             affectedrows = ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public static void deleteAccount(int userID){
+        User cur = id_to_users.get(userID);
+        System.out.println("--- Delete Account ---");
+        System.out.println("Once you delete your account,");
+        System.out.println("your likes, dislikes and comments, subscribe counts to other channels, your video(s) also be deleted");
+        System.out.print("Are you sure you want to delete this account? (y/n): ");
+        if(prompt_yn()==true){
+            //unsubscribe from all channels
+            for(Map.Entry iter:cur.getId_to_sub().entrySet()){
+                int authorID = (int)iter.getKey();
+                boolean sub = (boolean)iter.getValue();
+                User author = id_to_users.get(authorID);
+                author.incSubs(-1);
+            }
+            //remove likes and dislikes
+            for(Map.Entry iter:cur.getId_to_like().entrySet()){
+                int videoID = (int)iter.getKey();
+                int like = (int)iter.getValue();
+                Video v = id_to_videos.get(videoID);
+                if(like==1)v.decLike();
+                else if(like==-1)v.decDislike();
+            }
+            //remove comments
+            for(Map.Entry iter:id_to_videos.entrySet()){
+                Video v = (Video)iter.getValue();
+                ArrayList<Comment>cm=v.getComments();
+                ArrayList<Integer>rm=new ArrayList<Integer>();
+                for(int i=0; i<cm.size(); i++){
+                    Comment c = cm.get(i);
+                    if(c.getUserID()==userID){
+                        rm.add(i);
+                    }
+                }
+                for(int i=rm.size()-1; i>=0; i--){
+                    v.delcomment(rm.get(i));
+                }
+            }
+            //delete own videos
+            for(int videoID:cur.getVideos()){
+                id_to_videos.remove(videoID);
+            }
+            
+            String email = cur.getEmail();
+            email_to_id.remove(email);
+            DelAccDB(userID);
+        }
+    }
+    
+    public static void DelAccDB(int userID) {
+        PreparedStatement ps;
+        String query = "DELETE FROM userdata WHERE userid = ?";
+        int affectedrows = 0;
+        try {
+            ps = ConnectionDB.dbConnection().prepareStatement(query);
+            
+            ps.setInt(1, userID);
+            
+            affectedrows = ps.executeUpdate();
+            ret_start=true;
         } catch (SQLException ex) {
             Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, null, ex);
         }

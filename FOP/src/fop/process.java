@@ -54,7 +54,7 @@ public class process{
                 author.incSubs(subscribe?-1:1);
                 user.set_sub(authorID);
             } 
-            if(ret_home)break;
+            if(ret_home||ret_start)break;
         }while(c!=0);
     }
     
@@ -87,7 +87,7 @@ public class process{
                 //view commenter
                 viewAuthor(commenterID,userID);
             }
-            if(ret_home)break;
+            if(ret_home||ret_start)break;
         }while(c!=0);
     }
     

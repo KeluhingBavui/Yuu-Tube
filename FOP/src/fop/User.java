@@ -33,27 +33,6 @@ public class User implements java.io.Serializable{
         id_to_sub=new HashMap<Integer,Boolean>();
     }
     
-    public String toString(){ //for test
-        String res = "";
-        res+="Name: "+name+"\n";
-        res+="Email: "+email+"\n";
-        res+="Password: "+password+"\n";
-        res+="id: "+id+"\n";
-        res+="videosCount: "+videos.size()+"\n";
-        res+="subscribers Count: "+subscribersCount+"\n";
-        res+="totalViews: "+totalViews+"\n";
-        res+="VideosID: \n";
-        if(videos.size()!=0){
-            for(int i=0; i<videos.size(); i++){
-               res+=videos.get(i)+", ";
-            }
-            res+="\n";
-        }else{
-            res+="empty la wei\n";
-        }
-        return res;
-    }
-    
     public String one_toString(){ 
         String res = "";
         res+="Name: "+name+"\n";
@@ -184,4 +163,28 @@ public class User implements java.io.Serializable{
     public void setId_to_sub(HashMap<Integer, Boolean> id_to_sub) {
         this.id_to_sub = id_to_sub;
     }
+    
+    
+    /*
+    public String toString(){ //for test
+        String res = "";
+        res+="Name: "+name+"\n";
+        res+="Email: "+email+"\n";
+        res+="Password: "+password+"\n";
+        res+="id: "+id+"\n";
+        res+="videosCount: "+videos.size()+"\n";
+        res+="subscribers Count: "+subscribersCount+"\n";
+        res+="totalViews: "+totalViews+"\n";
+        res+="VideosID: \n";
+        if(videos.size()!=0){
+            for(int i=0; i<videos.size(); i++){
+               res+=videos.get(i)+", ";
+            }
+            res+="\n";
+        }else{
+            res+="empty la wei\n";
+        }
+        return res;
+    }
+    */
 }

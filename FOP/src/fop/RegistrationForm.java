@@ -10,6 +10,7 @@ package fop;
  * @author Daniel
  */
 import static fop.YuuTube.*;
+import static fop.authentication.*;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
@@ -59,7 +60,6 @@ public class RegistrationForm extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(190, 144, 212));
 
         jLabelClose.setFont(new java.awt.Font("Maiandra GD", 1, 18)); // NOI18N
-        jLabelClose.setForeground(new java.awt.Color(0, 0, 0));
         jLabelClose.setText("X");
         jLabelClose.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabelClose.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -69,11 +69,9 @@ public class RegistrationForm extends javax.swing.JFrame {
         });
 
         jLabel2.setFont(new java.awt.Font("Maiandra GD", 1, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Create An Account");
 
         jLabelMin.setFont(new java.awt.Font("Malgun Gothic", 1, 18)); // NOI18N
-        jLabelMin.setForeground(new java.awt.Color(0, 0, 0));
         jLabelMin.setText("_");
         jLabelMin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabelMin.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -301,12 +299,14 @@ public class RegistrationForm extends javax.swing.JFrame {
         //Set unique id for user(For the program to identify the different users)
         int id = userptr;
         //Making sure the users follow the rules when filling up details
-        if (name.equals("")) {
+        if (name.equals("")) {    
             JOptionPane.showMessageDialog(null, "Name field is empty, please fill in your name");
         } else if (email.equals("")) {
             JOptionPane.showMessageDialog(null, "Email field is empty, please fill in your email");
         } else if (pass.equals("")) {
             JOptionPane.showMessageDialog(null, "Password field is empty, please fill in your password");
+        } else if (!password_length(pass)){
+            JOptionPane.showMessageDialog(null, "Password doesn't have length of at least 8");
         } else if (!pass.equals(repass)) {
             JOptionPane.showMessageDialog(null, "Retyped password is not the same as original password. Please try again");
         } else if (checkUsername(email)) {
@@ -316,7 +316,7 @@ public class RegistrationForm extends javax.swing.JFrame {
             //Insert data received into database
             PreparedStatement ps;
             String query = "INSERT INTO userdata (userid, useremail,  nameuser, password) VALUES (?,?,?,?)";
-
+            
             try {
                 ps = ConnectionDB.dbConnection().prepareStatement(query);
                 

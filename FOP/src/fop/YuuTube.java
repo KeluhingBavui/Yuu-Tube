@@ -15,7 +15,8 @@ public class YuuTube {
     static process proc = new process();
     static profile prof = new profile();
     static util U = new util();
-    static Boolean ret_home = false;
+    static Boolean ret_home = false; //happens when user choose 1 (most)
+    static Boolean ret_start = false; //happens when user delete account
     static final Boolean os = System.getProperty("os.name").contains("Windows");
     static String path;
     static int loginstate; //-1: sign up, 0: fail, 1:sign in
@@ -103,6 +104,7 @@ public class YuuTube {
                     System.out.println("You haven't registered to the system");
                 }
             }
+            if(ret_start)ret_start=false;
             //keep save 
             U.save();
         }while(c!=0);
@@ -168,6 +170,7 @@ public class YuuTube {
                 prof.profile(userID);
             }
             if(ret_home)ret_home=false;
+            if(ret_start)break;
         }while(c!=0);
     }
     /*
@@ -318,7 +321,7 @@ public class YuuTube {
                 author.incSubs(subscribe?-1:1);
             }
             user.set_like(videoID, likey);
-            if(ret_home)break;
+            if(ret_home||ret_start)break;
         }while(c!=0);
         return;
     }
@@ -384,7 +387,7 @@ public class YuuTube {
                 String vidName = videoName.get(cc);
                 play_page(userID,vidName);
             }
-            if(ret_home)break;
+            if(ret_home||ret_start)break;
         }while(c!=0);
     }
     
@@ -424,7 +427,7 @@ public class YuuTube {
                 //delete
                 proc.delete(userID);
             }
-            if(ret_home)break;
+            if(ret_home||ret_start)break;
         }while(c!=0);
     }
     

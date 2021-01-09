@@ -11,7 +11,8 @@ public class profile {
         "Change Email",
         "Change Password",                               
         "History",
-        "Liked Videos"
+        "Liked Videos",
+        "Delete Account"
     };
     
     public static void profile(int userID){
@@ -41,8 +42,10 @@ public class profile {
                 history_page(userID);
             }else if(c==5){
                 liked_page(userID);
+            }else if(c==6){
+                auth.deleteAccount(userID);
             }
-            if(ret_home)break;
+            if(ret_home||ret_start)break;
         }while(c!=0);
     }
     
@@ -105,7 +108,7 @@ public class profile {
                 int cc = prompt_input1(videoName.size());
                 play_page(userID,videoName.get(cc));
             }
-            if(ret_home)break;
+            if(ret_home||ret_start)break;
         }while(c!=0);
     }
     
@@ -171,7 +174,7 @@ public class profile {
                 v.decLike();
                 user.set_like(videoID,0);
             }
-            if(ret_home)break;
+            if(ret_home||ret_start)break;
         }while(c!=0);
     }
 }
