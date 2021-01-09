@@ -41,6 +41,7 @@ public class profile {
                 //history
                 history_page(userID);
             }else if(c==5){
+                //like
                 liked_page(userID);
             }else if(c==6){
                 auth.deleteAccount(userID);
@@ -132,6 +133,7 @@ public class profile {
                 int likey = ((int)mapElement.getValue()); 
                 if(likey==1){
                     Video v = id_to_videos.get(videoID);
+                    if(v==null)continue;
                     String name = v.getTitle();
                     System.out.printf("%d. %s\n",videoName.size()+1,name);
                     videoName.add(name);

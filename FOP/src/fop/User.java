@@ -51,9 +51,21 @@ public class User implements java.io.Serializable{
         this.videos.remove(pos);
     }
     
+    public void del_his(int pos){
+        this.history.remove(pos);
+    }
+    
     public void hadd_videos(String name){
         this.history.removeIf(str->str.contains(name));
         this.history.add(name);
+    }
+    
+    public void rem_sub(int pos){
+        if(id_to_sub.get(pos)!=null)id_to_sub.remove(pos);
+    }
+    
+    public void rem_like(int pos){
+        if(id_to_like.get(pos)!=null)id_to_sub.remove(pos);
     }
     
     public int get_like(int videoID){

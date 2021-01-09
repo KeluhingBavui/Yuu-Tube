@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -116,7 +117,7 @@ public class authentication {
                 int authorID = (int)iter.getKey();
                 boolean sub = (boolean)iter.getValue();
                 User author = id_to_users.get(authorID);
-                author.incSubs(-1);
+                if(sub)author.incSubs(-1);
             }
             //remove likes and dislikes
             for(Map.Entry iter:cur.getId_to_like().entrySet()){
@@ -140,6 +141,28 @@ public class authentication {
                 for(int i=rm.size()-1; i>=0; i--){
                     v.delcomment(rm.get(i));
                 }
+            }
+            //history, sub, liked of others
+            for(Map.Entry iter:id_to_users.entrySet()){
+                User u = (User)iter.getValue();
+                ArrayList<String>history=u.getHistory();
+                ArrayList<Integer>rm=new ArrayList<Integer>();
+                for(int i=0; i<history.size(); i++){
+                    int videoID = name_to_id.get(history.get(i));
+                    Video v = id_to_videos.get(videoID);
+                    if(v.getAuthorID()==userID){
+                        rm.add(i);
+                    }
+                }
+                for(int i=rm.size()-1; i>=0; i--){
+                    u.del_his(rm.get(i));
+                }
+                rm = new ArrayList<Integer>();
+                HashMap<Integer,Integer> like_others = u.getId_to_like();
+                for(int videoID:u.getVideos()){
+                    u.rem_like(videoID);
+                }
+                u.rem_sub(userID);
             }
             //delete own videos
             for(int videoID:cur.getVideos()){

@@ -240,6 +240,27 @@ public class process{
             int views = v.getViewsCount();
             int totalviews = author.getTotalViews();
             author.setTotalViews(totalviews-views);
+            //remove history and liked videos of others
+            for(Map.Entry iter:id_to_users.entrySet()){
+                User u = (User)iter.getValue();
+                ArrayList<String>history=u.getHistory();
+                ArrayList<Integer>rm=new ArrayList<Integer>();
+                for(int i=0; i<history.size(); i++){
+                    int videoID2 = name_to_id.get(history.get(i));
+                    Video v2 = id_to_videos.get(videoID2);
+                    if(v2.getAuthorID()==authorID){
+                        rm.add(i);
+                    }
+                }
+                for(int i=rm.size()-1; i>=0; i--){
+                    u.del_his(rm.get(i));
+                }
+                rm = new ArrayList<Integer>();
+                HashMap<Integer,Integer> like_others = u.getId_to_like();
+                for(int videoID2:u.getVideos()){
+                    u.rem_like(videoID2);
+                }
+            }
             author.del_videos(c);
             id_to_videos.remove(videoID);
             name_to_id.remove(v.getTitle());
