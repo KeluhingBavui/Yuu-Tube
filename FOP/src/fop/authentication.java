@@ -11,7 +11,7 @@ public class authentication {
     public static boolean password_length(String s){
         return (s.length()>=8);
     }
-    
+     
     public static void chg_email(int userID){
         User cur = id_to_users.get(userID);
         System.out.println("--- Change Email ---");
@@ -112,6 +112,7 @@ public class authentication {
                 int authorID = (int)iter.getKey();
                 boolean sub = (boolean)iter.getValue();
                 User author = id_to_users.get(authorID);
+                if(author==null)continue;
                 if(sub)author.incSubs(-1);
             }
             //remove likes and dislikes
@@ -119,6 +120,7 @@ public class authentication {
                 int videoID = (int)iter.getKey();
                 int like = (int)iter.getValue();
                 Video v = id_to_videos.get(videoID);
+                if(v==null)continue;
                 if(like==1)v.decLike();
                 else if(like==-1)v.decDislike();
             }
@@ -145,14 +147,13 @@ public class authentication {
                 for(int i=0; i<history.size(); i++){
                     int videoID = name_to_id.get(history.get(i));
                     Video v = id_to_videos.get(videoID);
-                    if(v.getAuthorID()==userID){
+                    if(v!=null && v.getAuthorID()==userID){
                         rm.add(i);
                     }
                 }
                 for(int i=rm.size()-1; i>=0; i--){
                     u.del_his(rm.get(i));
                 }
-                rm = new ArrayList<Integer>();
                 HashMap<Integer,Integer> like_others = u.getId_to_like();
                 for(int videoID:u.getVideos()){
                     u.rem_like(videoID);
@@ -161,12 +162,17 @@ public class authentication {
             }
             //delete own videos
             for(int videoID:cur.getVideos()){
+                Video v = id_to_videos.get(videoID);
+                if(v==null)continue;
+                name_to_id.remove(v.getTitle());
                 id_to_videos.remove(videoID);
             }
             
             String email = cur.getEmail();
             email_to_id.remove(email);
             DelAccDB(userID);
+            id_to_users.remove(userID);
+            ret_start=true;
         }
     }
     
@@ -180,7 +186,6 @@ public class authentication {
             ps.setInt(1, userID);
             
             affectedrows = ps.executeUpdate();
-            ret_start=true;
         } catch (SQLException ex) {
             Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, null, ex);
         }
