@@ -122,11 +122,6 @@ public class RegistrationForm extends javax.swing.JFrame {
         jLabel5.setText("Password:");
 
         jTextField_Email.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jTextField_Email.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField_EmailActionPerformed(evt);
-            }
-        });
 
         jPasswordField_PASSWORD.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
 
@@ -156,11 +151,6 @@ public class RegistrationForm extends javax.swing.JFrame {
         jLabel6.setText("Name:");
 
         jTextField_Name.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jTextField_Name.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField_NameActionPerformed(evt);
-            }
-        });
 
         jLabel7.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -279,10 +269,6 @@ public class RegistrationForm extends javax.swing.JFrame {
         this.setState(RegistrationForm.ICONIFIED);
     }//GEN-LAST:event_jLabelMinMouseClicked
 
-    private void jTextField_EmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_EmailActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField_EmailActionPerformed
-
     private void jLabelLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelLoginMouseClicked
         //Call for login form to appear
         LoginForm lgf = new LoginForm();
@@ -293,10 +279,6 @@ public class RegistrationForm extends javax.swing.JFrame {
         //Close this form window
         this.dispose();
     }//GEN-LAST:event_jLabelLoginMouseClicked
-
-    private void jTextField_NameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_NameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField_NameActionPerformed
 
     private void jButton_Register_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Register_ActionPerformed
         //Register button clicked!
