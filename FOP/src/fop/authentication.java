@@ -1,17 +1,16 @@
 package fop;
 
 import static fop.YuuTube.*;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.sql.*;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 public class authentication {
+    
+    public static boolean password_length(String s){
+        return (s.length()>=8);
+    }
     
     public static void chg_email(int userID){
         User cur = id_to_users.get(userID);
@@ -79,10 +78,6 @@ public class authentication {
                 prompt_any();
             }
         }while(true);
-    }
-    
-    public static boolean password_length(String s){
-        return (s.length()>=8);
     }
     
     public static void UpdatePasswordDB(String new_pass) {
