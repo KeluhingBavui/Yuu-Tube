@@ -92,6 +92,7 @@ public class process{
     }
     
     public static String show_videos(int authorID){
+        String top5 = top5();
         User author = id_to_users.get(authorID);
         String res = "";
         int cnt;

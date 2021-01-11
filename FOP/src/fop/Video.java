@@ -1,6 +1,7 @@
 package fop;
 
 import static fop.YuuTube.*;
+import static fop.process.*;
 import java.util.*;
 
 public class Video implements java.io.Serializable{
@@ -29,6 +30,7 @@ public class Video implements java.io.Serializable{
     }
     
     public String all_toString(){
+        String top5 = top5();
         String res = "";
         res += "VideoID: "+ videoID +"\n";
         res += "Path: "+ path + "\n";
@@ -51,6 +53,7 @@ public class Video implements java.io.Serializable{
     }
     
     public String one_toString(){
+        String top5 = top5();
         String res = "";
         if(trendingNow)res+="This video is trending now. \n";
         res += ">>> "+ title + " <<<\n";
@@ -67,6 +70,7 @@ public class Video implements java.io.Serializable{
     }
     
     public String table_toString(){
+        String top5 = top5();
         String res = "";
         for(int i=0; i<20-title.length(); i++)res+=" ";
         res += title;
