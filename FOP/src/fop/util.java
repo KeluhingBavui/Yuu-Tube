@@ -6,7 +6,6 @@ import java.io.*;
 import java.util.*;
 
 public class util {
-    private static String[] options = {"Play video"};
     
     public boolean isInteger(String s){
         try{
