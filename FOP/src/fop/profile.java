@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 public class profile {
-    //history
+    
     static String[] profile_actions = {
         "Go back", 
         "Home Page",
