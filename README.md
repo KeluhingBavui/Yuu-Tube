@@ -1,10 +1,5 @@
 # Yuu-Tube
 ## FOP Group Project
-### Comments:
-
-Clear Screen function fails
-
-Haven't done 2FA function
 
 Login And Registration uses PostgreSQL.
 Problem here is can't connect to database remotely unless in the same local network. (Since we're all all over Malaysia)
