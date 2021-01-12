@@ -11,7 +11,7 @@ public class process{
         "Go Back",
         "Home Page",
         "Play video (only from this channel)",
-        "Subsribe/Unsubscribe"
+        "Subscribe/Unsubscribe"
     };
     
     public static void viewAuthor(int authorID, int userID){
