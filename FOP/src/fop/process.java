@@ -71,7 +71,7 @@ public class process{
         int commenterID = com.getUserID();
         User commenter = id_to_users.get(commenterID);
         System.out.println("Comment: "+com.getComment());
-        System.out.println("Commentor: "+commenter.getName());
+        System.out.println("Commenter: "+commenter.getName());
         int c;
         do{
             System.out.println("Available Actions: ");
